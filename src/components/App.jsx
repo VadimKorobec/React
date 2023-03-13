@@ -1,10 +1,10 @@
 import React from 'react';
-import { Counter } from './Counter';
+import { PostItem } from './PostItem';
 
 export const App = () => {
   return (
-    <div>
-      <Counter />
-    </div>
+    <>
+      <PostItem post={{ id: 1, title: 'JavaScript', body: 'Description' }} />
+    </>
   );
 };
