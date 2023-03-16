@@ -1,8 +1,7 @@
 import React, { useState } from 'react';
+import { PostForm } from './PostForm';
 import { PostList } from './PostList';
 import './styles/App.css';
-import { MyButton } from './UI/button/MyButton';
-import { MyInput } from './UI/input/MyInput';
 
 export const App = () => {
   const [posts, setPosts] = useState([
@@ -12,13 +11,13 @@ export const App = () => {
     { id: 4, title: 'Node.js', body: 'Description' },
   ]);
 
+  const createPost = newPost => {
+    setPosts([...posts, newPost]);
+  };
+
   return (
     <div className="App">
-      <form>
-        <MyInput type="text" placeholder="Titel post" />
-        <MyInput type="text" placeholder="Description post" />
-        <MyButton type="submit">Create post</MyButton>
-      </form>
+      <PostForm create={createPost} />
       <PostList posts={posts} title="List 1" />
     </div>
   );
