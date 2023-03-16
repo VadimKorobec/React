@@ -11,6 +11,7 @@ export const PostForm = ({ create }) => {
       ...post,
       id: Date.now(),
     };
+
     create(newPost);
     reset();
   };
@@ -18,6 +19,7 @@ export const PostForm = ({ create }) => {
   const reset = () => {
     setPost({ title: '', body: '' });
   };
+
   return (
     <div>
       <form>
