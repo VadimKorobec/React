@@ -7,6 +7,7 @@ import { MyButton } from './UI/button/MyButton';
 import { MyModal } from './UI/MyModal/MyModal';
 import { usePosts } from 'hooks/usePosts';
 import axios from 'axios';
+import PostService from 'API/PostService';
 
 export const App = () => {
   const [posts, setPosts] = useState([]);
@@ -14,12 +15,12 @@ export const App = () => {
   const [modal, setModal] = useState(false);
   const sortedAndSearchPosts = usePosts(posts, filter.sort, filter.query);
 
-  useEffect(() => {}, []);
+  useEffect(() => {
+    fetchPosts();
+  }, []);
 
   const fetchPosts = async () => {
-    const response = await axios.get(
-      'https://jsonplaceholder.typicode.com/posts'
-    );
+    const response = await PostService.getAll();
     setPosts(response.data);
   };
 
