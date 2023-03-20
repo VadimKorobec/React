@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { PostFilter } from './PostFilter';
 import { PostForm } from './PostForm';
 import { PostList } from './PostList';
@@ -14,11 +14,13 @@ export const App = () => {
   const [modal, setModal] = useState(false);
   const sortedAndSearchPosts = usePosts(posts, filter.sort, filter.query);
 
+  useEffect(() => {}, []);
+
   const fetchPosts = async () => {
-    const pesponse = await axios.get(
+    const response = await axios.get(
       'https://jsonplaceholder.typicode.com/posts'
     );
-    console.log(pesponse.data);
+    setPosts(response.data);
   };
 
   const createPost = newPost => {
