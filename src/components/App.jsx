@@ -9,7 +9,7 @@ import { usePosts } from 'hooks/usePosts';
 import PostService from 'API/PostService';
 import { Loader } from './UI/Loader/Loader';
 import { useFetching } from 'hooks/useFetching';
-import { getPageCounter } from 'utils/page';
+import { getPageCounter, getPagesArray } from 'utils/page';
 
 export const App = () => {
   const [posts, setPosts] = useState([]);
@@ -19,12 +19,7 @@ export const App = () => {
   const [limit, setLimit] = useState(10);
   const [page, setPage] = useState(1);
 
-  let pagesArray = [];
-  for (let i = 0; i < totalPages; i++) {
-    pagesArray.push(i + 1);
-  }
-
-  console.log([pagesArray]);
+  let pagesArray = getPagesArray(totalPages);
 
   const [fetchPosts, isPostsLoading, postError] = useFetching(async () => {
     const response = await PostService.getAll(limit, page);
@@ -33,13 +28,11 @@ export const App = () => {
     setTotalPages(getPageCounter(totalCount, limit));
   });
 
-  console.log(totalPages);
-
   const sortedAndSearchPosts = usePosts(posts, filter.sort, filter.query);
 
   useEffect(() => {
     fetchPosts();
-  }, []);
+  }, [page]);
 
   const createPost = newPost => {
     setPosts([...posts, newPost]);
@@ -48,6 +41,10 @@ export const App = () => {
 
   const removePost = post => {
     setPosts(posts.filter(p => p.id !== post.id));
+  };
+
+  const changePage = page => {
+    setPage(page);
   };
 
   return (
@@ -79,6 +76,17 @@ export const App = () => {
           title="List"
         />
       )}
+      <div className="page__wrapper">
+        {pagesArray.map(p => (
+          <span
+            onClick={() => changePage(p)}
+            key={p}
+            className={page === p ? 'page__current' : 'page'}
+          >
+            {p}
+          </span>
+        ))}
+      </div>
     </div>
   );
 };
