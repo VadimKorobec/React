@@ -9,7 +9,8 @@ import { usePosts } from 'hooks/usePosts';
 import PostService from 'API/PostService';
 import { Loader } from './UI/Loader/Loader';
 import { useFetching } from 'hooks/useFetching';
-import { getPageCounter, getPagesArray } from 'utils/page';
+import { getPageCounter } from 'utils/page';
+import { Pagination } from './UI/pagination/Pagination';
 
 export const App = () => {
   const [posts, setPosts] = useState([]);
@@ -74,6 +75,7 @@ export const App = () => {
           title="List"
         />
       )}
+      <Pagination page={page} changePage={changePage} totalPages={totalPages} />
     </div>
   );
 };
