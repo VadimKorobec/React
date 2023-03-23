@@ -48,7 +48,6 @@ export const App = () => {
 
   return (
     <div className="App">
-      <button onClick={fetchPosts}>Get posts</button>
       <MyButton style={{ marginTop: 30 }} onClick={() => setModal(true)}>
         Create Post
       </MyButton>
