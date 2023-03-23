@@ -7,7 +7,12 @@ import './styles/App.css';
 export const App = () => {
   return (
     <BrowserRouter>
-      <div></div>
+      <div className="navbar">
+        <div className="navbar__link">
+          <a href="/about">About</a>
+          <a href="/posts">Posts</a>
+        </div>
+      </div>
       <Route path="/about">
         <About />
       </Route>
