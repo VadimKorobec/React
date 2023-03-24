@@ -1,12 +1,12 @@
 import { About } from 'pages/About';
 import { Posts } from 'pages/Posts';
 import React from 'react';
-import { BrowserRouter, Route, Routes } from 'react-router-dom';
+import { Routes, Route } from 'react-router-dom';
 import './styles/App.css';
 
 export const App = () => {
   return (
-    <BrowserRouter>
+    <>
       <div className="navbar">
         <div className="navbar__link">
           <a href="/about">About</a>
@@ -14,13 +14,10 @@ export const App = () => {
         </div>
       </div>
       <Routes>
-        <Route path="/about">
-          <About />
-        </Route>
-        <Route path="/posts">
-          <Posts />
-        </Route>
+        <Route path="/about" element={<About />} />
+
+        <Route path="/posts" element={<Posts />} />
       </Routes>
-    </BrowserRouter>
+    </>
   );
 };
