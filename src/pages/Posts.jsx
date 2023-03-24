@@ -16,7 +16,7 @@ export const Posts = () => {
   const [filter, setFilter] = useState({ sort: '', query: '' });
   const [modal, setModal] = useState(false);
   const [totalPages, setTotalPages] = useState(0);
-  const [limit, setLimit] = useState(10);
+  const [limit] = useState(10);
   const [page, setPage] = useState(1);
 
   const [fetchPosts, isPostsLoading, postError] = useFetching(async () => {
@@ -29,7 +29,7 @@ export const Posts = () => {
   const sortedAndSearchPosts = usePosts(posts, filter.sort, filter.query);
 
   useEffect(() => {
-    fetchPosts();
+    fetchPosts(page);
   }, [page]);
 
   const createPost = newPost => {
